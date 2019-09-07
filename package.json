@@ -12,7 +12,7 @@
   ],
   "scripts": {
       "build": "microbundle",
-      "bench": "node bench",
+      "bench": "yarn build && node bench",
       "release": "yarn build && git commit -am $npm_package_version && git tag $npm_package_version && git push && git push --tags && npm login && npm publish"
   },
   "devDependencies": {

@@ -1,9 +1,8 @@
 const { Suite } = require('benchmark');
-const honnold = require('./src');
+const assert = require('assert');
 const traverse = require('traverse');
 const treeCrawl = require('tree-crawl');
-
-const foo = new Suite();
+const honnold = require('./dist/honnold');
 
 const tree = {};
 
@@ -27,13 +26,29 @@ for (let x = 0; x < wide; x++) {
     tree[x.toString()] = adjacent;
 }
 
-const deoptimize = (leaf) => leaf.break && console.log('skipped');
-
 console.log(`\nSimple traverse (${wide} wide x ${deep} deep):\n`);
-foo
-	.add('honnold', () => honnold(tree, deoptimize))
-	.add('traverse', () => traverse(tree).forEach(deoptimize))
-	.add('treeCrawl', () => treeCrawl(tree, deoptimize))
+new Suite()
+	.add('honnold', () => {
+        const leaves = [];
+        honnold(tree, leaf => leaves.push(leaf));
+        assert.strictEqual(leaves.length, wide);
+    })
+	.add('traverse', () => {
+        const leaves = traverse(tree).reduce(function (acc, x) {
+            if (this.isLeaf) acc.push(x);
+            return acc;
+        }, []);
+        assert.strictEqual(leaves.length, wide);
+    })
+	.add('treeCrawl', () => {
+        const leaves = [];
+        treeCrawl(tree, (n) => {
+            if (!(n && n.constructor == Object && typeof n === 'object')) {
+                leaves.push(n);
+            }
+        }, {getChildren: node => Object.values(node)});
+        assert.strictEqual(leaves.length, wide);
+    })
     .on('cycle', e => console.log(String(e.target)))
     .on('complete', function() {
         console.log('\nFastest is ' + this.filter('fastest').map('name'));

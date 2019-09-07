@@ -30,14 +30,8 @@ honnold(obj, (leaf, {remove}) => {
 });
 
 // Remove all leaves with a specific key
-honnold(obj, (leaf, {remove, keys}) => {
-    const key = keys[keys.length - 1];
+honnold(obj, (leaf, {remove, key}) => {
     if (key === 'prop2') remove();
-});
-
-// Remove all leaves beyond a specific depth
-honnold(obj, (leaf, {remove, keys}) => {
-    if (keys.length > 4) remove();
 });
 
 // Replace all leaves with a specific value
@@ -59,9 +53,9 @@ I thought the existing traversal libraries were bloated and slow. Through benchm
 ```
 Simple traverse (100 wide x 20 deep):
 
-honnold x 1,212 ops/sec ±2.32% (89 runs sampled)
-traverse x 521 ops/sec ±3.53% (88 runs sampled)
-treeCrawl x 43,950 ops/sec ±0.98% (93 runs sampled)
+honnold x 1,665 ops/sec ±1.36% (90 runs sampled)
+traverse x 494 ops/sec ±3.46% (86 runs sampled)
+treeCrawl x 1,781 ops/sec ±0.67% (92 runs sampled)
 
 Fastest is treeCrawl
 ```
