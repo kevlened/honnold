@@ -28,19 +28,19 @@ for (let x = 0; x < wide; x++) {
 
 console.log(`\nSimple traverse (${wide} wide x ${deep} deep):\n`);
 new Suite()
-	.add('honnold', () => {
+    .add('honnold', () => {
         const leaves = [];
         honnold(tree, leaf => leaves.push(leaf));
         assert.strictEqual(leaves.length, wide);
     })
-	.add('traverse', () => {
+    .add('traverse', () => {
         const leaves = traverse(tree).reduce(function (acc, x) {
             if (this.isLeaf) acc.push(x);
             return acc;
         }, []);
         assert.strictEqual(leaves.length, wide);
     })
-	.add('treeCrawl', () => {
+    .add('treeCrawl', () => {
         const leaves = [];
         treeCrawl(tree, (n) => {
             if (!(n && n.constructor == Object && typeof n === 'object')) {

@@ -46,7 +46,7 @@ I thought the existing traversal libraries were bloated and slow. Through benchm
 
 ## Stats
 
-* honnold - [285 B](https://bundlephobia.com/result?p=honnold@0.1.0)
+* honnold - [262 B](https://bundlephobia.com/result?p=honnold@0.2.1)
 * [traverse](https://github.com/substack/js-traverse) - [1.4 kB](https://bundlephobia.com/result?p=traverse@0.6.6)
 * [tree-crawl](https://github.com/ngryman/tree-crawl) - [1.2 kB](https://bundlephobia.com/result?p=tree-crawl@1.0.5)
 
