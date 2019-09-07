@@ -1,8 +1,7 @@
 // https://stackoverflow.com/a/40053014/1978203
 module.exports = function traverse(object, onLeaf) {
     var n, node, key, stack = [object];
-    while (stack.length) {
-        node = stack.pop();
+    while (node = stack.pop()) {
         for (key in node) {
             n = node[key];
             if (n && n.constructor == Object && typeof n == 'object') stack.push(n);
