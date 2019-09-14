@@ -1,7 +1,7 @@
 {
   "name": "honnold",
   "description": "Quickly traverse large js objects without the weight",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "source": "src/recursive.js",
   "main": "dist/honnold.js",
   "unpkg": "dist/honnold.umd.js",
