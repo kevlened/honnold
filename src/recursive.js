@@ -18,7 +18,7 @@ module.exports = function traverse(node, {onLeaf, onInternalNode}, parent, keys)
     isLeaf = false;
     n = node[key];
     if (n && n.constructor == Object && typeof n === 'object') {
-      let removed = false;
+      let modified = false;
       if (onInternalNode) {
         !internalNodeExtra
           ? onInternalNode(n)
@@ -27,16 +27,16 @@ module.exports = function traverse(node, {onLeaf, onInternalNode}, parent, keys)
             key,
             keys: [...keys, key],
             remove() {
-              removed = true;
+              modified = true;
               delete node[key];
             },
             replace(val) {
+              modified = true;
               node[key] = val;
-              n = val;
             }
           });
       }
-      if (n && n.constructor == Object && typeof n === 'object' && !removed) traverse(n, {onLeaf, onInternalNode}, node, keys && [...keys, key]);
+      if (!modified) traverse(n, {onLeaf, onInternalNode}, node, keys && [...keys, key]);
     } else if (onLeaf) {
       !leafExtra
         ? onLeaf(n)

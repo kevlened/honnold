@@ -54,40 +54,40 @@ I thought the existing traversal libraries were bloated, slow, and difficult to 
 
 ## Stats
 
-* honnold - [262 B](https://bundlephobia.com/result?p=honnold@0.2.1)
-* [traverse](https://github.com/substack/js-traverse) - [1.4 kB](https://bundlephobia.com/result?p=traverse@0.6.6)
-* [tree-crawl](https://github.com/ngryman/tree-crawl) - [1.2 kB](https://bundlephobia.com/result?p=tree-crawl@1.0.5)
+* honnold [![bundlephobia](https://img.shields.io/bundlephobia/minzip/honnold.svg)](https://bundlephobia.com/result?p=honnold)
+* [traverse](https://github.com/substack/js-traverse) [![bundlephobia](https://img.shields.io/bundlephobia/minzip/traverse.svg)](https://bundlephobia.com/result?p=traverse)
+* [tree-crawl](https://github.com/ngryman/tree-crawl) [![bundlephobia](https://img.shields.io/bundlephobia/minzip/tree-crawl.svg)](https://bundlephobia.com/result?p=tree-crawl)
 
 ```
 Leaf traverse (100 wide x 20 deep):
 
-honnold x 1,131 ops/sec ±6.74% (72 runs sampled)
-traverse x 579 ops/sec ±3.68% (88 runs sampled)
-tree-crawl x 1,648 ops/sec ±5.68% (76 runs sampled)
+honnold x 1,495 ops/sec ±1.33% (90 runs sampled)
+traverse x 591 ops/sec ±3.59% (87 runs sampled)
+tree-crawl x 2,108 ops/sec ±0.78% (91 runs sampled)
 
 Fastest is tree-crawl
 
 Leaf with keys traverse (100 wide x 20 deep):
 
-honnold x 859 ops/sec ±1.05% (91 runs sampled)
-traverse x 580 ops/sec ±2.70% (90 runs sampled)
+honnold x 831 ops/sec ±2.19% (89 runs sampled)
+traverse x 559 ops/sec ±1.25% (92 runs sampled)
 tree-crawl - N/A: 
 
 Fastest is honnold
 
 Leaf with depth traverse (100 wide x 20 deep):
 
-honnold x 877 ops/sec ±0.31% (94 runs sampled)
-traverse x 582 ops/sec ±2.40% (89 runs sampled)
-tree-crawl x 2,061 ops/sec ±0.39% (92 runs sampled)
+honnold x 868 ops/sec ±2.10% (91 runs sampled)
+traverse x 558 ops/sec ±2.59% (90 runs sampled)
+tree-crawl x 2,087 ops/sec ±0.59% (94 runs sampled)
 
 Fastest is tree-crawl
 
 Internal node traverse (100 wide x 20 deep):
 
-honnold x 1,423 ops/sec ±0.47% (94 runs sampled)
-traverse x 581 ops/sec ±2.62% (89 runs sampled)
-tree-crawl x 2,043 ops/sec ±0.45% (90 runs sampled)
+honnold x 1,434 ops/sec ±2.57% (94 runs sampled)
+traverse x 565 ops/sec ±0.43% (93 runs sampled)
+tree-crawl x 2,044 ops/sec ±1.75% (93 runs sampled)
 
 Fastest is tree-crawl
 ```
