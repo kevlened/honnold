@@ -1,5 +1,6 @@
 {
   "name": "honnold",
+  "description": "Quickly traverse large js objects without the weight",
   "version": "0.3.0",
   "source": "src/recursive.js",
   "main": "dist/honnold.js",
@@ -7,6 +8,13 @@
   "repository": "git@github.com:kevlened/honnold.git",
   "author": "kevlened <boyettel@gmail.com>",
   "license": "MIT",
+  "keywords": [
+    "tree",
+    "traverse",
+    "traversal",
+    "recursive",
+    "walk"
+  ],
   "files": [
       "dist"
   ],
