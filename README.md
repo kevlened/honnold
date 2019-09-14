@@ -20,29 +20,37 @@ const obj = {
 };
 
 // Basic traversal
-honnold(obj, leaf => console.log(leaf));
+honnold(obj, {onLeaf: leaf => console.log(leaf)});
 // > true
 // > hi
 
 // Remove all leaves with a specific value
-honnold(obj, (leaf, {remove}) => {
+honnold(obj, {onLeaf: (leaf, {remove}) => {
     if (leaf === 'hi') remove();
-});
+}});
 
 // Remove all leaves with a specific key
-honnold(obj, (leaf, {remove, key}) => {
+honnold(obj, {onLeaf: (leaf, {remove, key}) => {
     if (key === 'prop2') remove();
-});
+}});
 
 // Replace all leaves with a specific value
-honnold(obj, (leaf, {replace}) => {
+honnold(obj, {onLeaf: (leaf, {replace}) => {
     if (leaf === 'hi') replace('bye');
-});
+}});
+
+// Remove all leaves beyond a specific depth
+honnold(obj, {onLeaf: (leaf, {remove, keys}) => {
+    if (keys.length > 4) remove();
+}});
+
+// Loop through all internal nodes
+honnold(obj, {onInternalNode: node => console.log(node)});
 ```
 
 ## Why?
 
-I thought the existing traversal libraries were bloated and slow. Through benchmarking, I've learned the existing libraries are pretty good. `honnold` is still useful if size is important or the interface is easier to use.
+I thought the existing traversal libraries were bloated, slow, and difficult to use. Through benchmarking, I've learned the existing libraries (namely `tree-crawl`) are pretty fast, but `honnold` is still useful if size is important or you want a simpler interface.
 
 ## Stats
 
@@ -51,13 +59,37 @@ I thought the existing traversal libraries were bloated and slow. Through benchm
 * [tree-crawl](https://github.com/ngryman/tree-crawl) - [1.2 kB](https://bundlephobia.com/result?p=tree-crawl@1.0.5)
 
 ```
-Simple traverse (100 wide x 20 deep):
+Leaf traverse (100 wide x 20 deep):
 
-honnold x 1,665 ops/sec ±1.36% (90 runs sampled)
-traverse x 494 ops/sec ±3.46% (86 runs sampled)
-treeCrawl x 1,781 ops/sec ±0.67% (92 runs sampled)
+honnold x 1,131 ops/sec ±6.74% (72 runs sampled)
+traverse x 579 ops/sec ±3.68% (88 runs sampled)
+tree-crawl x 1,648 ops/sec ±5.68% (76 runs sampled)
 
-Fastest is treeCrawl
+Fastest is tree-crawl
+
+Leaf with keys traverse (100 wide x 20 deep):
+
+honnold x 859 ops/sec ±1.05% (91 runs sampled)
+traverse x 580 ops/sec ±2.70% (90 runs sampled)
+tree-crawl - N/A: 
+
+Fastest is honnold
+
+Leaf with depth traverse (100 wide x 20 deep):
+
+honnold x 877 ops/sec ±0.31% (94 runs sampled)
+traverse x 582 ops/sec ±2.40% (89 runs sampled)
+tree-crawl x 2,061 ops/sec ±0.39% (92 runs sampled)
+
+Fastest is tree-crawl
+
+Internal node traverse (100 wide x 20 deep):
+
+honnold x 1,423 ops/sec ±0.47% (94 runs sampled)
+traverse x 581 ops/sec ±2.62% (89 runs sampled)
+tree-crawl x 2,043 ops/sec ±0.45% (90 runs sampled)
+
+Fastest is tree-crawl
 ```
 
 ## License

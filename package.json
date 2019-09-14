@@ -1,7 +1,7 @@
 {
   "name": "honnold",
   "version": "0.2.1",
-  "source": "src/index.js",
+  "source": "src/recursive.js",
   "main": "dist/honnold.js",
   "unpkg": "dist/honnold.umd.js",
   "repository": "git@github.com:kevlened/honnold.git",
