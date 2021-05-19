@@ -3,7 +3,7 @@ module.exports = function traverse(node, {onLeaf, onInternalNode}, parent, keys)
     onInternalNode(node, {
       node,
       key: '',
-      keys: [],
+      keys: () => [],
       remove() {},
       replace() {}
     });
@@ -25,7 +25,7 @@ module.exports = function traverse(node, {onLeaf, onInternalNode}, parent, keys)
           : onInternalNode(n, {
             node,
             key,
-            keys: [...keys, key],
+            keys: () => [...keys, key],
             remove() {
               modified = true;
               delete node[key];
@@ -43,7 +43,7 @@ module.exports = function traverse(node, {onLeaf, onInternalNode}, parent, keys)
         : onLeaf(n, {
           node,
           key,
-          keys: [...keys, key],
+          keys: () => [...keys, key],
           remove() {
               delete node[key];
           },
@@ -59,7 +59,7 @@ module.exports = function traverse(node, {onLeaf, onInternalNode}, parent, keys)
         : onLeaf(n, {
           node,
           key: keys[keys.length - 1],
-          keys,
+          keys: () => keys,
           remove() {
             delete parent[keys[keys.length - 1]];
           },

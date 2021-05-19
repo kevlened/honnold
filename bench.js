@@ -66,7 +66,7 @@ async function main() {
     new Suite()
       .add('honnold', () => {
         const leaves = [];
-        honnold(tree, {onLeaf: (leaf, {keys}) => leaves.push([leaf, keys])});
+        honnold(tree, {onLeaf: (leaf, {keys}) => leaves.push([leaf, keys()])});
         assert.strictEqual(leaves.length, wide);
         assert.strictEqual(leaves[0][1].length, deep);
       })
@@ -84,7 +84,7 @@ async function main() {
     new Suite()
       .add('honnold', () => {
         const leaves = [];
-        honnold(tree, {onLeaf: (leaf, {keys}) => leaves.push([leaf, keys.length])});
+        honnold(tree, {onLeaf: (leaf, {keys}) => leaves.push([leaf, keys().length])});
         assert.strictEqual(leaves.length, wide);
         assert.strictEqual(leaves[0][1], deep);
       })

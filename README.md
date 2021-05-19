@@ -41,7 +41,7 @@ honnold(obj, {onLeaf: (leaf, {replace}) => {
 
 // Remove all leaves beyond a specific depth
 honnold(obj, {onLeaf: (leaf, {remove, keys}) => {
-    if (keys.length > 4) remove();
+    if (keys().length > 4) remove();
 }});
 
 // Loop through all internal nodes
@@ -61,33 +61,33 @@ I thought the existing traversal libraries were bloated, slow, and difficult to 
 ```
 Leaf traverse (100 wide x 20 deep):
 
-honnold x 1,495 ops/sec ±1.33% (90 runs sampled)
-traverse x 591 ops/sec ±3.59% (87 runs sampled)
-tree-crawl x 2,108 ops/sec ±0.78% (91 runs sampled)
+honnold x 3,032 ops/sec ±0.46% (95 runs sampled)
+traverse x 1,107 ops/sec ±0.29% (96 runs sampled)
+tree-crawl x 3,516 ops/sec ±0.14% (98 runs sampled)
 
 Fastest is tree-crawl
 
 Leaf with keys traverse (100 wide x 20 deep):
 
-honnold x 831 ops/sec ±2.19% (89 runs sampled)
-traverse x 559 ops/sec ±1.25% (92 runs sampled)
+honnold x 2,404 ops/sec ±0.20% (98 runs sampled)
+traverse x 1,052 ops/sec ±1.82% (91 runs sampled)
 tree-crawl - N/A: 
 
 Fastest is honnold
 
 Leaf with depth traverse (100 wide x 20 deep):
 
-honnold x 868 ops/sec ±2.10% (91 runs sampled)
-traverse x 558 ops/sec ±2.59% (90 runs sampled)
-tree-crawl x 2,087 ops/sec ±0.59% (94 runs sampled)
+honnold x 2,372 ops/sec ±0.21% (98 runs sampled)
+traverse x 1,078 ops/sec ±1.28% (93 runs sampled)
+tree-crawl x 3,421 ops/sec ±1.43% (93 runs sampled)
 
 Fastest is tree-crawl
 
 Internal node traverse (100 wide x 20 deep):
 
-honnold x 1,434 ops/sec ±2.57% (94 runs sampled)
-traverse x 565 ops/sec ±0.43% (93 runs sampled)
-tree-crawl x 2,044 ops/sec ±1.75% (93 runs sampled)
+honnold x 2,559 ops/sec ±0.61% (96 runs sampled)
+traverse x 1,070 ops/sec ±0.71% (96 runs sampled)
+tree-crawl x 2,808 ops/sec ±0.33% (95 runs sampled)
 
 Fastest is tree-crawl
 ```

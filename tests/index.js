@@ -32,4 +32,18 @@ test('onLeaf - object', () => {
 	assert.equal(leaves, [{}]);
 });
 
+test('onLeaf - keys', () => {
+  const all = [];
+	honnold({
+		a: {
+			b: true
+		}
+	}, {
+		onLeaf: (_, { keys }) => all.push(keys())
+	});
+	assert.equal(all, [
+		['a', 'b']
+	]);
+});
+
 test.run();
