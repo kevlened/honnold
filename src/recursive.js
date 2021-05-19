@@ -1,71 +1,38 @@
-module.exports = function traverse(node, {onLeaf, onInternalNode}, parent, keys) {
-  if (onInternalNode && !parent) {
-    onInternalNode(node, {
-      node,
-      key: '',
-      keys: () => [],
-      remove() {},
-      replace() {}
-    });
+const parentMap = new WeakMap();
+module.exports = function traverse(current, {onLeaf, onInternalNode}, parent, currentKey) {
+  let cb;
+  if (current && typeof current === 'object' && !Array.isArray(current)) {
+    parentMap.set(current, {p: parent, k: currentKey});
+    let isInternal = false;
+    for (const key of Object.keys(current)) {
+      isInternal = true;
+      traverse(current[key], {onLeaf, onInternalNode}, current, key);
+    }
+    cb = isInternal ? onInternalNode : onLeaf;
+  } else {
+    cb = onLeaf;
   }
 
-  let n,
-    isLeaf = true,
-    leafExtra = onLeaf && onLeaf.length > 1,
-    internalNodeExtra = onInternalNode && onInternalNode.length > 1;
-  if (leafExtra || internalNodeExtra) keys = keys || [];
-  for (const key in node) {
-    isLeaf = false;
-    n = node[key];
-    if (n && n.constructor == Object && typeof n === 'object') {
-      let modified = false;
-      if (onInternalNode) {
-        !internalNodeExtra
-          ? onInternalNode(n)
-          : onInternalNode(n, {
-            node,
-            key,
-            keys: () => [...keys, key],
-            remove() {
-              modified = true;
-              delete node[key];
-            },
-            replace(val) {
-              modified = true;
-              node[key] = val;
-            }
-          });
+  cb && cb(current, {
+    remove() { delete parent[currentKey] },
+    replace(next) { parent[currentKey] = next },
+    key: currentKey,
+
+    // could create depth(), but it's extra size for a rare optimization
+
+    // getting keys is expensive, so hide it
+    keys() {
+      const resolved = [];
+
+      // get the key of the parent until there are no parents
+      let p = parent;
+      let k = currentKey;
+      while (p) {
+        resolved.unshift(k);
+        ({p, k} = parentMap.get(p) || {});
       }
-      if (!modified) traverse(n, {onLeaf, onInternalNode}, node, keys && [...keys, key]);
-    } else if (onLeaf) {
-      !leafExtra
-        ? onLeaf(n)
-        : onLeaf(n, {
-          node,
-          key,
-          keys: () => [...keys, key],
-          remove() {
-              delete node[key];
-          },
-          replace(val) {
-              node[key] = val;
-          }
-        });
+      
+      return resolved;
     }
-  }
-  if (onLeaf && isLeaf && parent) {
-    !leafExtra
-        ? onLeaf(n)
-        : onLeaf(n, {
-          node,
-          key: keys[keys.length - 1],
-          keys: () => keys,
-          remove() {
-            delete parent[keys[keys.length - 1]];
-          },
-          replace(val) {
-            parent[keys[keys.length - 1]] = val;
-          }
-        });
-  }
+  });
 }

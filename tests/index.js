@@ -1,6 +1,6 @@
 const { test } = require('uvu');
 const assert = require('uvu/assert');
-const honnold = require('../src/iterative');
+const honnold = require('../src/recursive');
 
 test('onLeaf - null', () => {
   const leaves = [];

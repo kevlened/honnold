@@ -61,33 +61,33 @@ I thought the existing traversal libraries were bloated, slow, and difficult to 
 ```
 Leaf traverse (100 wide x 20 deep):
 
-honnold x 3,032 ops/sec ±0.46% (95 runs sampled)
-traverse x 1,107 ops/sec ±0.29% (96 runs sampled)
-tree-crawl x 3,516 ops/sec ±0.14% (98 runs sampled)
+honnold x 3,399 ops/sec ±0.37% (97 runs sampled)
+traverse x 1,124 ops/sec ±0.38% (96 runs sampled)
+tree-crawl x 3,510 ops/sec ±0.13% (100 runs sampled)
 
 Fastest is tree-crawl
 
 Leaf with keys traverse (100 wide x 20 deep):
 
-honnold x 2,404 ops/sec ±0.20% (98 runs sampled)
-traverse x 1,052 ops/sec ±1.82% (91 runs sampled)
+honnold x 2,518 ops/sec ±0.10% (98 runs sampled)
+traverse x 1,135 ops/sec ±0.40% (97 runs sampled)
 tree-crawl - N/A: 
 
 Fastest is honnold
 
 Leaf with depth traverse (100 wide x 20 deep):
 
-honnold x 2,372 ops/sec ±0.21% (98 runs sampled)
-traverse x 1,078 ops/sec ±1.28% (93 runs sampled)
-tree-crawl x 3,421 ops/sec ±1.43% (93 runs sampled)
+honnold x 2,513 ops/sec ±0.10% (99 runs sampled)
+traverse x 1,146 ops/sec ±0.21% (98 runs sampled)
+tree-crawl x 3,424 ops/sec ±0.47% (97 runs sampled)
 
 Fastest is tree-crawl
 
 Internal node traverse (100 wide x 20 deep):
 
-honnold x 2,559 ops/sec ±0.61% (96 runs sampled)
-traverse x 1,070 ops/sec ±0.71% (96 runs sampled)
-tree-crawl x 2,808 ops/sec ±0.33% (95 runs sampled)
+honnold x 2,806 ops/sec ±0.82% (99 runs sampled)
+traverse x 1,093 ops/sec ±0.12% (97 runs sampled)
+tree-crawl x 2,932 ops/sec ±0.75% (98 runs sampled)
 
 Fastest is tree-crawl
 ```
